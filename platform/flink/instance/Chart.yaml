@@ -1,0 +1,5 @@
+apiVersion: v2
+name: flink-deployment
+description: Apache Flink session cluster (FlinkDeployment)
+type: application
+version: 0.1.0

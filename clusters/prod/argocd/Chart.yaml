@@ -1,0 +1,10 @@
+apiVersion: v2
+name: argocd
+description: Vendored Argo CD (engine) for the prod cluster
+type: application
+version: 0.1.0
+# Verify versions: helm search repo argo/argo-cd --versions
+dependencies:
+  - name: argo-cd
+    version: "7.7.0"
+    repository: "https://argoproj.github.io/argo-helm"

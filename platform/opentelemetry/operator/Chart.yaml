@@ -1,0 +1,11 @@
+apiVersion: v2
+name: otel-operator
+description: Vendored umbrella chart for opentelemetry-operator
+type: application
+version: 0.1.0
+# Pin the upstream chart version. Vendor it with: make vendor
+# Verify available versions: helm search repo <repo>/opentelemetry-operator --versions
+dependencies:
+  - name: opentelemetry-operator
+    version: "0.74.0"
+    repository: "https://open-telemetry.github.io/opentelemetry-helm-charts"

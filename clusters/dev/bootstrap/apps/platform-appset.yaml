@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: platform-dev
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/nochaosio/gitops.git
+        revision: HEAD
+        files:
+          - path: "platform/*/*/config.json"
+  template:
+    metadata:
+      name: "dev-{{ .name }}"
+      labels:
+        environment: dev
+        tool: "{{ .tool }}"
+      annotations:
+        argocd.argoproj.io/sync-wave: "{{ .syncWave }}"
+    spec:
+      project: platform-dev
+      source:
+        repoURL: https://github.com/nochaosio/gitops.git
+        targetRevision: HEAD
+        path: "{{ .path.path }}"
+        helm:
+          releaseName: "{{ .name }}"
+          valueFiles:
+            - values.yaml
+            - values-dev.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{ .namespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+          - ApplyOutOfSyncOnly=true
+        retry:
+          limit: 10
+          backoff:
+            duration: 10s
+            factor: 2
+            maxDuration: 5m

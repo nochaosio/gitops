@@ -1,0 +1,6 @@
+{
+  "name": "postgres-cluster",
+  "tool": "postgres",
+  "namespace": "postgres",
+  "syncWave": "2"
+}

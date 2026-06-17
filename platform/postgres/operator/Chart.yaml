@@ -1,0 +1,11 @@
+apiVersion: v2
+name: postgres-operator
+description: Vendored umbrella chart for cloudnative-pg
+type: application
+version: 0.1.0
+# Pin the upstream chart version. Vendor it with: make vendor
+# Verify available versions: helm search repo <repo>/cloudnative-pg --versions
+dependencies:
+  - name: cloudnative-pg
+    version: "0.23.0"
+    repository: "https://cloudnative-pg.github.io/charts"

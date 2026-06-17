@@ -1,0 +1,6 @@
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: 2d
+  grafana:
+    adminPassword: admin

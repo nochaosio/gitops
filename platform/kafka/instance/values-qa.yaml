@@ -1,0 +1,5 @@
+cluster:
+  replicationFactor: 2
+  minInsyncReplicas: 1
+nodePool:
+  replicas: 2

@@ -1,0 +1,5 @@
+jaeger:
+  name: jaeger
+  strategy: allInOne
+  storage:
+    type: memory

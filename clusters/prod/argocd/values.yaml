@@ -1,0 +1,24 @@
+argo-cd:
+  # Keep resource names as `argocd-*` (matches Makefile/port-forward targets).
+  fullnameOverride: argocd
+  configs:
+    params:
+      # TLS terminated by ingress/port-forward; server runs insecure internally.
+      server.insecure: true
+    cm:
+      # ApplicationSet may target the local cluster; allowed by default.
+      application.instanceLabelKey: argocd.argoproj.io/instance
+  dex:
+    enabled: false
+  notifications:
+    enabled: false
+  controller:
+    replicas: 1
+  server:
+    replicas: 2
+  repoServer:
+    replicas: 2
+  applicationSet:
+    replicas: 2
+  redis-ha:
+    enabled: true

@@ -1,0 +1,6 @@
+{
+  "name": "jaeger-operator",
+  "tool": "jaeger",
+  "namespace": "jaeger",
+  "syncWave": "0"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "gitea",
+  "tool": "gitea",
+  "namespace": "gitea",
+  "syncWave": "1"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "postgres-operator",
+  "tool": "postgres",
+  "namespace": "postgres",
+  "syncWave": "0"
+}

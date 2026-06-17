@@ -1,0 +1,6 @@
+{
+  "name": "kafka-cluster",
+  "tool": "kafka",
+  "namespace": "kafka",
+  "syncWave": "2"
+}

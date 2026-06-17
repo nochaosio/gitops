@@ -1,0 +1,15 @@
+cluster:
+  name: pg
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4
+  storage:
+    size: 5Gi
+    storageClass: ""
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  # Optional bootstrap of an initial database.
+  bootstrap:
+    database: app
+    owner: app

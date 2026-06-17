@@ -1,0 +1,6 @@
+{
+  "name": "flink-operator",
+  "tool": "flink",
+  "namespace": "flink",
+  "syncWave": "0"
+}

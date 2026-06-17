@@ -1,0 +1,24 @@
+gitea:
+  replicaCount: 1
+  # Use the chart's bundled stateful dependencies for a self-contained install.
+  redis-cluster:
+    enabled: false
+  postgresql:
+    enabled: false
+  postgresql-ha:
+    enabled: false
+  valkey-cluster:
+    enabled: false
+  gitea:
+    config:
+      database:
+        DB_TYPE: sqlite3
+      session:
+        PROVIDER: memory
+      cache:
+        ADAPTER: memory
+      queue:
+        TYPE: level
+  persistence:
+    enabled: true
+    size: 5Gi

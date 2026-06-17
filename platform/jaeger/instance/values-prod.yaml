@@ -1,0 +1,5 @@
+jaeger:
+  strategy: production
+  storage:
+    # Production should point at a real backend (e.g. elasticsearch).
+    type: badger

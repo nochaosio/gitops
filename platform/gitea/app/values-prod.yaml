@@ -1,0 +1,7 @@
+gitea:
+  # HA real (replicaCount > 1) exige storage RWX (ReadWriteMany) + DB/cache
+  # externos. O kind (local-path) só oferece RWO, então mantemos 1 réplica.
+  # Em prod de verdade: RWX + Postgres externo + Redis/Valkey, aí suba a réplica.
+  replicaCount: 1
+  persistence:
+    size: 20Gi

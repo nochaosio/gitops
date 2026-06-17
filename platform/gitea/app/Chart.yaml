@@ -1,0 +1,11 @@
+apiVersion: v2
+name: gitea
+description: Vendored umbrella chart for gitea
+type: application
+version: 0.1.0
+# Pin the upstream chart version. Vendor it with: make vendor
+# Verify available versions: helm search repo <repo>/gitea --versions
+dependencies:
+  - name: gitea
+    version: "11.0.1"
+    repository: "https://dl.gitea.com/charts/"

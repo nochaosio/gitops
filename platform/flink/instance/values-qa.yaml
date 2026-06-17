@@ -1,0 +1,4 @@
+deployment:
+  taskSlots: 4
+  taskManager:
+    replicas: 2

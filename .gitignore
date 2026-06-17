@@ -1,0 +1,7 @@
+# Vendored charts are intentionally committed (run `make vendor`).
+# Ignore local/editor noise only.
+*.swp
+*.tmp
+.DS_Store
+kubeconfig
+*.kubeconfig

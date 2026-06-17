@@ -1,0 +1,9 @@
+deployment:
+  taskSlots: 4
+  jobManager:
+    cpu: 2
+    memory: 2048m
+  taskManager:
+    replicas: 3
+    cpu: 2
+    memory: 4096m

@@ -1,0 +1,17 @@
+# Shared defaults for cert-manager (prerequisite for Flink/Jaeger/OTel webhooks).
+cert-manager:
+  crds:
+    enabled: true
+    keep: true
+  global:
+    leaderElection:
+      namespace: cert-manager
+  replicaCount: 1
+  webhook:
+    replicaCount: 1
+  cainjector:
+    replicaCount: 1
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi

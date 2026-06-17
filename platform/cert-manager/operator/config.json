@@ -1,0 +1,6 @@
+{
+  "name": "cert-manager",
+  "tool": "cert-manager",
+  "namespace": "cert-manager",
+  "syncWave": "-2"
+}

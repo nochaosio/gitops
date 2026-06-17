@@ -1,0 +1,6 @@
+{
+  "name": "otel-operator",
+  "tool": "opentelemetry",
+  "namespace": "opentelemetry",
+  "syncWave": "0"
+}

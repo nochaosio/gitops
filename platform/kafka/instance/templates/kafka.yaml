@@ -1,0 +1,57 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: {{ .Values.nodePool.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    strimzi.io/cluster: {{ .Values.cluster.name }}
+spec:
+  replicas: {{ .Values.nodePool.replicas }}
+  roles:
+    - controller
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: {{ .Values.nodePool.storage.size | quote }}
+        deleteClaim: false
+        {{- if .Values.nodePool.storage.class }}
+        class: {{ .Values.nodePool.storage.class | quote }}
+        {{- end }}
+  {{- with .Values.nodePool.resources }}
+  resources:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: {{ .Values.cluster.name }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    strimzi.io/node-pools: enabled
+    strimzi.io/kraft: enabled
+spec:
+  kafka:
+    version: {{ .Values.cluster.version | quote }}
+    metadataVersion: {{ .Values.cluster.metadataVersion | quote }}
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+    config:
+      offsets.topic.replication.factor: {{ .Values.cluster.replicationFactor }}
+      transaction.state.log.replication.factor: {{ .Values.cluster.replicationFactor }}
+      transaction.state.log.min.isr: {{ .Values.cluster.minInsyncReplicas }}
+      default.replication.factor: {{ .Values.cluster.replicationFactor }}
+      min.insync.replicas: {{ .Values.cluster.minInsyncReplicas }}
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}

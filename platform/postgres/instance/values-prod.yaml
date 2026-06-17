@@ -1,0 +1,10 @@
+cluster:
+  instances: 3
+  storage:
+    size: 50Gi
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      memory: 2Gi

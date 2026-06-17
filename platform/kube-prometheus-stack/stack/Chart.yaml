@@ -1,0 +1,11 @@
+apiVersion: v2
+name: kube-prometheus-stack
+description: Vendored umbrella chart for kube-prometheus-stack
+type: application
+version: 0.1.0
+# Pin the upstream chart version. Vendor it with: make vendor
+# Verify available versions: helm search repo <repo>/kube-prometheus-stack --versions
+dependencies:
+  - name: kube-prometheus-stack
+    version: "67.5.0"
+    repository: "https://prometheus-community.github.io/helm-charts"

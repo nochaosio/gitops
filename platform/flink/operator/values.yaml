@@ -1,0 +1,14 @@
+flink-kubernetes-operator:
+  watchNamespaces:
+    - flink
+  # Webhook uses cert-manager (installed as a prerequisite component).
+  webhook:
+    create: true
+  rbac:
+    create: true
+    nodesRule:
+      create: true
+  operatorResources:
+    requests:
+      cpu: 100m
+      memory: 256Mi

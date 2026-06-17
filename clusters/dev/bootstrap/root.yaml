@@ -1,0 +1,27 @@
+# App-of-apps raiz do cluster dev. Este é o ÚNICO manifesto aplicado à mão:
+#   kubectl apply -f clusters/dev/bootstrap/root.yaml
+# Ele sincroniza tudo em clusters/dev/bootstrap/apps (self-manage + plataforma).
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nochaosio/gitops.git
+    targetRevision: HEAD
+    path: clusters/dev/bootstrap/apps
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

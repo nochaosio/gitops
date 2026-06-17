@@ -1,0 +1,11 @@
+apiVersion: v2
+name: kafka-operator
+description: Vendored umbrella chart for strimzi-kafka-operator
+type: application
+version: 0.1.0
+# Pin the upstream chart version. Vendor it with: make vendor
+# Verify available versions: helm search repo <repo>/strimzi-kafka-operator --versions
+dependencies:
+  - name: strimzi-kafka-operator
+    version: "0.45.0"
+    repository: "https://strimzi.io/charts/"

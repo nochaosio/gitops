@@ -1,0 +1,30 @@
+# Faz o Argo CD gerenciar a si mesmo: upgrades/config viram git push.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nochaosio/gitops.git
+    targetRevision: HEAD
+    path: clusters/prod/argocd
+    helm:
+      releaseName: argocd
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      # prune desligado de propósito: evita o Argo CD se auto-deletar em caso
+      # de config quebrada. Recursos órfãos podem ser removidos manualmente.
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

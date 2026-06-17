@@ -1,0 +1,18 @@
+kube-prometheus-stack:
+  fullnameOverride: kube-prometheus-stack
+  prometheus:
+    prometheusSpec:
+      retention: 7d
+      resources:
+        requests:
+          cpu: 200m
+          memory: 512Mi
+      # Discover ServiceMonitors/PodMonitors created by other tools cluster-wide.
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+  grafana:
+    enabled: true
+    defaultDashboardsTimezone: browser
+  alertmanager:
+    enabled: true

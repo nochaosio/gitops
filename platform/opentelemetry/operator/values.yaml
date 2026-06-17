@@ -1,0 +1,11 @@
+opentelemetry-operator:
+  admissionWebhooks:
+    certManager:
+      enabled: true
+  manager:
+    collectorImage:
+      repository: otel/opentelemetry-collector-k8s
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi

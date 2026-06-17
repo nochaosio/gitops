@@ -1,0 +1,12 @@
+# Cluster kind para o ambiente qa (1 control-plane + 4 workers).
+# UI do Argo CD é acessada via 'kubectl port-forward' (sem extraPortMappings
+# para evitar conflito de porta entre os 3 clusters no mesmo host).
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: gitops-qa
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+  - role: worker
+  - role: worker

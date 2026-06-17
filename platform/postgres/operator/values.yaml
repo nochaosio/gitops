@@ -1,0 +1,8 @@
+cloudnative-pg:
+  replicaCount: 1
+  monitoring:
+    podMonitorEnabled: false
+  resources:
+    requests:
+      cpu: 50m
+      memory: 100Mi

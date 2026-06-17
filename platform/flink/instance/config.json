@@ -1,0 +1,6 @@
+{
+  "name": "flink-deployment",
+  "tool": "flink",
+  "namespace": "flink",
+  "syncWave": "2"
+}

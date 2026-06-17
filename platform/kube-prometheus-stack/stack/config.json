@@ -1,0 +1,6 @@
+{
+  "name": "kube-prometheus-stack",
+  "tool": "kube-prometheus-stack",
+  "namespace": "monitoring",
+  "syncWave": "1"
+}

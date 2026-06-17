@@ -1,0 +1,6 @@
+{
+  "name": "kafka-operator",
+  "tool": "kafka",
+  "namespace": "kafka",
+  "syncWave": "0"
+}

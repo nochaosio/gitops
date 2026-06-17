@@ -1,0 +1,9 @@
+strimzi-kafka-operator:
+  # Watch only the kafka namespace where the Kafka CR lives.
+  watchNamespaces:
+    - kafka
+  watchAnyNamespace: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi

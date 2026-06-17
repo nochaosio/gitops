@@ -1,0 +1,6 @@
+{
+  "name": "jaeger-instance",
+  "tool": "jaeger",
+  "namespace": "jaeger",
+  "syncWave": "2"
+}

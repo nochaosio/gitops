@@ -1,0 +1,11 @@
+apiVersion: v2
+name: jaeger-operator
+description: Vendored umbrella chart for jaeger-operator
+type: application
+version: 0.1.0
+# Pin the upstream chart version. Vendor it with: make vendor
+# Verify available versions: helm search repo <repo>/jaeger-operator --versions
+dependencies:
+  - name: jaeger-operator
+    version: "2.57.0"
+    repository: "https://jaegertracing.github.io/helm-charts"

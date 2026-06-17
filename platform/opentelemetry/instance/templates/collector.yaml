@@ -1,0 +1,10 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: {{ .Values.collector.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  mode: {{ .Values.collector.mode }}
+  replicas: {{ .Values.collector.replicas }}
+  config:
+    {{- toYaml .Values.collector.config | nindent 4 }}

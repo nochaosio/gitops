@@ -1,0 +1,21 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  image: {{ .Values.deployment.image }}
+  flinkVersion: {{ .Values.deployment.flinkVersion }}
+  serviceAccount: {{ .Values.deployment.serviceAccount }}
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: {{ .Values.deployment.taskSlots | quote }}
+  jobManager:
+    replicas: {{ .Values.deployment.jobManager.replicas }}
+    resource:
+      cpu: {{ .Values.deployment.jobManager.cpu }}
+      memory: {{ .Values.deployment.jobManager.memory | quote }}
+  taskManager:
+    replicas: {{ .Values.deployment.taskManager.replicas }}
+    resource:
+      cpu: {{ .Values.deployment.taskManager.cpu }}
+      memory: {{ .Values.deployment.taskManager.memory | quote }}
