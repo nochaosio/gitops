@@ -46,6 +46,23 @@ spec:
         port: 9093
         type: internal
         tls: true
+      {{- if .Values.external.enabled }}
+      # Additive external listener — keeps the internal plain/tls listeners.
+      # Strimzi creates NEW services (kafka-external-bootstrap + per-broker)
+      # and sets advertised listeners; the existing services are untouched.
+      - name: external
+        port: 9094
+        type: nodeport
+        tls: false
+        configuration:
+          bootstrap:
+            nodePort: {{ .Values.external.bootstrapNodePort }}
+          brokers:
+            {{- range $i := until (int .Values.nodePool.replicas) }}
+            - broker: {{ $i }}
+              nodePort: {{ add $.Values.external.brokerNodePortBase $i }}
+            {{- end }}
+      {{- end }}
     config:
       offsets.topic.replication.factor: {{ .Values.cluster.replicationFactor }}
       transaction.state.log.replication.factor: {{ .Values.cluster.replicationFactor }}

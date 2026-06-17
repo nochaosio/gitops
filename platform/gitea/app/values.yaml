@@ -1,3 +1,9 @@
+# Extra NodePort service for the Gitea HTTP UI (additive — does not change the
+# chart's own gitea-http service).
+nodePort:
+  enabled: true
+  http: 30300
+
 gitea:
   replicaCount: 1
   # Use the chart's bundled stateful dependencies for a self-contained install.

@@ -16,3 +16,9 @@ kube-prometheus-stack:
     defaultDashboardsTimezone: browser
   alertmanager:
     enabled: true
+
+# Extra NodePort services (additive — do not change the chart's own services).
+nodePorts:
+  enabled: true
+  grafana: 30030
+  prometheus: 30090

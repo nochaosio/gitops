@@ -1,3 +1,10 @@
+# Extra NodePort service for the OTLP receivers (additive — does not change the
+# operator-managed collector service).
+nodePort:
+  enabled: true
+  grpc: 30317
+  http: 30318
+
 collector:
   name: otelcol
   mode: deployment

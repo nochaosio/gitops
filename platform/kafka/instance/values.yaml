@@ -14,3 +14,10 @@ nodePool:
     requests:
       cpu: 250m
       memory: 512Mi
+
+# Additive external (nodeport) listener for Kafka. bootstrap + one nodePort per
+# broker (broker-N -> brokerNodePortBase + N).
+external:
+  enabled: true
+  bootstrapNodePort: 30094
+  brokerNodePortBase: 30095
