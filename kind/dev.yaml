@@ -1,11 +1,12 @@
-# Cluster kind para o ambiente dev (1 control-plane + 3 workers).
-# UI do Argo CD é acessada via 'kubectl port-forward' (sem extraPortMappings
-# para evitar conflito de porta entre os 3 clusters no mesmo host).
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 name: gitops-dev
 nodes:
   - role: control-plane
+    image: kindest/node:v1.31.9
   - role: worker
+    image: kindest/node:v1.31.9
   - role: worker
+    image: kindest/node:v1.31.9
   - role: worker
+    image: kindest/node:v1.31.9
