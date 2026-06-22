@@ -1,0 +1,27 @@
+{{- /*
+  Extra NodePort Service to expose the Argo CD UI on a fixed port.
+  ADDITIVE: the chart's own `argocd-server` ClusterIP service is left untouched.
+  Server runs insecure (server.insecure: true) -> expose HTTP (targetPort 8080).
+  Access: http://<node-ip>:<nodePort>
+*/ -}}
+{{- if .Values.nodePort.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: argocd-server-nodeport
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/managed-by: gitops-nodeport
+    app.kubernetes.io/part-of: argocd
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: argocd-server
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: {{ .Values.nodePort.http }}
+{{- end }}

@@ -1,0 +1,29 @@
+# App-of-apps raiz do caminho "default" (env-agnóstico). Único manifesto aplicado
+# à mão (normalmente pelo bootstrap.sh):
+#   kubectl apply -f clusters/default/bootstrap/root.yaml
+# Sincroniza tudo em clusters/default/bootstrap/apps (self-manage + plataforma),
+# usando SOMENTE os values.yaml default de cada componente (sem overlay de env).
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nochaosio/gitops.git
+    targetRevision: HEAD
+    path: clusters/default/bootstrap/apps
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

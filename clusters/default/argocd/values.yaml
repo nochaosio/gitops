@@ -1,0 +1,26 @@
+# Extra NodePort service for the Argo CD UI (additive — does not change the
+# chart's own argocd-server service).
+nodePort:
+  enabled: true
+  http: 30443
+
+argo-cd:
+  # Keep resource names as `argocd-*` (matches Makefile/port-forward targets).
+  fullnameOverride: argocd
+  configs:
+    params:
+      # TLS terminated by ingress/port-forward; server runs insecure internally.
+      server.insecure: true
+    cm:
+      # ApplicationSet may target the local cluster; allowed by default.
+      application.instanceLabelKey: argocd.argoproj.io/instance
+      # Track resources by annotation, not label. Operators (e.g. Strimzi)
+      # propagate the CR's labels to the resources they generate (PVCs, pods…).
+      # With label tracking that makes Argo CD "adopt" those generated resources
+      # and prune them (they're not in Git) — which deletes Strimzi's Kafka PVCs
+      # and leaves the broker pod Pending forever. Annotation tracking avoids it.
+      application.resourceTrackingMethod: annotation
+  dex:
+    enabled: false
+  notifications:
+    enabled: false
